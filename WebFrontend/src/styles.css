@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Warm gradient from peach to pink */
+    background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  nav {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    padding: 15px 30px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #f76b1c; /* Hover color that matches the gradient */
+  }
+  
+  .form-container {
+    background: white;
+    padding: 25px 40px;
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .form-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  .form h2 {
+    margin: 0 0 15px;
+    color: #555;
+    font-size: 24px;
+  }
+  
+  label {
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  input, select {
+    background: #fffafa; /* Slightly off-white background for input fields */
+    color: #555;
+  }
+  
+  button {
+    background-color: #f76b1c; /* Vibrant button color */
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e65c00; /* Darker shade for button hover state */
+  }
+  
+  .form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23555" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right #fffafa;
+    background-position-x: 95%;
+  }
+  
+  input:focus, select:focus {
+    border-color: #f76b1c;
+    outline: none;
+  }
+  
+  @media (max-width: 600px) {
+    .form-container {
+      width: 90%;
+    }
+  
+    nav {
+      width: 100%;
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+  }
+  
