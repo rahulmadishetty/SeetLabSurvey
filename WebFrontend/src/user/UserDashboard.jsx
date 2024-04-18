@@ -43,7 +43,7 @@ const UserDashboard = () => {
           <h3>{survey.title}</h3>
           <button onClick={() => openSchedulePopup(survey.id)}>Schedule</button>
           <button onClick={() => takeSurvey(survey.id)}>Take Survey</button>
-          <button className="results-link" onClick={() => navigate(`/survey-results/${survey.id}`)}>Results</button>
+          <button onClick={() => navigate(`/survey-results/${survey.id}`)}>Results</button>
         </div>
       ))}
 
