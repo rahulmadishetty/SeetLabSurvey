@@ -250,4 +250,33 @@ body {
   background-color: #45a049;
 }
 
+.survey-panel button {
+  background: #f76b1c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.survey-panel button:hover {
+  background: #e65c00;
+}
+
+results-link {
+  background: none;
+  color: #f76b1c;
+  padding: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.results-link:hover {
+  color: #ff6f3c;
+}
+
+
 /* ... additional styles ... */
