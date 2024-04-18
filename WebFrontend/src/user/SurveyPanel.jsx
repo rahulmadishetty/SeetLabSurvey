@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SurveyPanel = ({ survey, onScheduleClick }) => {
+const SurveyPanel = ({ survey, onSchedule }) => {
   return (
     <div className="survey-panel">
-      <h3>{survey.title}</h3>
-      <p>{survey.description}</p>
-      <button onClick={onScheduleClick}>Schedule</button>
+      <h2>{survey.title}</h2>
+      <button onClick={onSchedule}>Schedule</button>
       <Link to={`/take-survey/${survey.id}`}>Take Survey</Link>
-      <Link to={`/reports/${survey.id}`}>Results</Link>
+      <Link to={`/survey-results/${survey.id}`}>Results</Link>
     </div>
   );
 };

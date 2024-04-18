@@ -9,40 +9,40 @@ const surveys = [
 
 const UserDashboard = () => {
   const [showSchedulePopup, setShowSchedulePopup] = useState(false);
-  const [selectedSurvey, setSelectedSurvey] = useState(null);
+  const [scheduledDate, setScheduledDate] = useState('');
 
-  const scheduleSurvey = (surveyId) => {
-    setSelectedSurvey(surveyId);
-    setShowSchedulePopup(true);
-  };
+  const openSchedulePopup = () => setShowSchedulePopup(true);
+  const closeSchedulePopup = () => setShowSchedulePopup(false);
 
-  const closePopup = () => {
-    setShowSchedulePopup(false);
-    setSelectedSurvey(null);
+  const handleDateChange = (e) => setScheduledDate(e.target.value);
+
+  const submitSchedule = (surveyId) => {
+    console.log(`Survey ${surveyId} scheduled for: ${scheduledDate}`);
+    closeSchedulePopup();
+    // Proceed with scheduling logic
   };
 
   return (
     <div>
       <h1>User Dashboard</h1>
-      <div className="survey-list">
-        {surveys.map((survey) => (
-          <div key={survey.id} className="survey-panel">
-            <h3>{survey.title}</h3>
-            <button onClick={() => scheduleSurvey(survey.id)}>Schedule</button>
+      {surveys.map((survey) => (
+        <div key={survey.id} className="survey-panel">
+          <h3>{survey.title}</h3>
+          <button onClick={openSchedulePopup}>Schedule</button>
+          <button className="button-link">
             <Link to={`/take-survey/${survey.id}`}>Take Survey</Link>
-            <Link to={`/survey-results/${survey.id}`}>Results</Link>
-          </div>
-        ))}
-      </div>
+          </button>
+          <Link to={`/survey-results/${survey.id}`}>Results</Link>
+        </div>
+      ))}
 
       {showSchedulePopup && (
         <div className="popup">
-          <div className="popup-inner">
-            <h2>Schedule Survey: {surveys.find(s => s.id === selectedSurvey)?.title}</h2>
-            <p>Select a date and time for when you would like to take this survey.</p>
-            {/* A basic input for scheduling, replace with a date-time picker as needed */}
-            <input type="datetime-local" />
-            <button onClick={closePopup}>Close</button>
+          <div className="popup-content">
+            <h2>Schedule Survey</h2>
+            <input type="datetime-local" value={scheduledDate} onChange={handleDateChange} />
+            <button onClick={() => submitSchedule(survey.id)}>Confirm</button>
+            <button onClick={closeSchedulePopup}>Cancel</button>
           </div>
         </div>
       )}
