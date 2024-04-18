@@ -108,4 +108,47 @@ body {
       transform: none;
     }
   }
+
+  .surveys-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .survey-panel {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .survey-panel h2 {
+    margin-top: 0;
+  }
+  
+  .survey-panel div {
+    margin-top: 10px;
+  }
+  
+  .survey-panel button {
+    margin-right: 10px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #32be8f;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .survey-panel button:hover {
+    background-color: #2b957a;
+  }
+  
+  .survey-panel a {
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: bold;
+  }
+  
   

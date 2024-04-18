@@ -1,0 +1,47 @@
+/* src/components/common/Footer.css */
+.footer {
+    background-color: #fff0f0; /* Change this color to match your layout */
+    color: #333; /* Change this color to match your layout */
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .footer-content {
+    margin-bottom: 10px;
+  }
+  
+  .footer-link {
+    margin: 0 10px;
+    color: #333; /* Change this color to match your layout */
+    text-decoration: none;
+  }
+  
+  .footer-separator {
+    color: #666; /* Change this color to match your layout */
+  }
+  
+  .footer-container {
+    width: 80%;
+    margin: auto;
+  }
+  
+  /* Ensures the footer doesn't overlap with content on small screens or with little content */
+  body, html {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    flex: 1 0 auto;
+  }
+  
+  .footer {
+    flex-shrink: 0;
+  }
+  
