@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const surveys = [
   { id: 1, title: 'Customer Satisfaction Survey' },
@@ -8,18 +8,31 @@ const surveys = [
 ];
 
 const UserDashboard = () => {
+  const navigate = useNavigate();
   const [showSchedulePopup, setShowSchedulePopup] = useState(false);
   const [scheduledDate, setScheduledDate] = useState('');
+  const [currentSurveyId, setCurrentSurveyId] = useState(null);
 
-  const openSchedulePopup = () => setShowSchedulePopup(true);
-  const closeSchedulePopup = () => setShowSchedulePopup(false);
+  const openSchedulePopup = (surveyId) => {
+    setCurrentSurveyId(surveyId);
+    setShowSchedulePopup(true);
+  };
+
+  const closeSchedulePopup = () => {
+    setShowSchedulePopup(false);
+    setCurrentSurveyId(null);
+  };
 
   const handleDateChange = (e) => setScheduledDate(e.target.value);
 
-  const submitSchedule = (surveyId) => {
-    console.log(`Survey ${surveyId} scheduled for: ${scheduledDate}`);
+  const submitSchedule = () => {
+    console.log(`Survey ${currentSurveyId} scheduled for: ${scheduledDate}`);
     closeSchedulePopup();
     // Proceed with scheduling logic
+  };
+
+  const takeSurvey = (surveyId) => {
+    navigate(`/take-survey/${surveyId}`);
   };
 
   return (
@@ -28,11 +41,9 @@ const UserDashboard = () => {
       {surveys.map((survey) => (
         <div key={survey.id} className="survey-panel">
           <h3>{survey.title}</h3>
-          <button onClick={openSchedulePopup}>Schedule</button>
-          <button className="button-link">
-            <Link to={`/take-survey/${survey.id}`}>Take Survey</Link>
-          </button>
-          <Link to={`/survey-results/${survey.id}`}>Results</Link>
+          <button onClick={() => openSchedulePopup(survey.id)}>Schedule</button>
+          <button onClick={() => takeSurvey(survey.id)}>Take Survey</button>
+          <button className="results-link" onClick={() => navigate(`/survey-results/${survey.id}`)}>Results</button>
         </div>
       ))}
 
@@ -41,7 +52,7 @@ const UserDashboard = () => {
           <div className="popup-content">
             <h2>Schedule Survey</h2>
             <input type="datetime-local" value={scheduledDate} onChange={handleDateChange} />
-            <button onClick={() => submitSchedule(survey.id)}>Confirm</button>
+            <button onClick={submitSchedule}>Confirm</button>
             <button onClick={closeSchedulePopup}>Cancel</button>
           </div>
         </div>
