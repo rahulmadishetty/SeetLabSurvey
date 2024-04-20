@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // For redirecting
+import { useNavigate } from 'react-router-dom';
 import AuthNavigation from './common/AuthNavigation';
+import { useAuth } from '../AuthContext'; // Import useAuth hook
 import '../styles.css';
 
 function SignInForm() {
+  const { login } = useAuth(); // Use the login function from AuthContext
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +24,7 @@ function SignInForm() {
         password
       });
       setLoading(false);
+      login(response.data.token, role); // Store the token and role in context
       // Assuming the response includes the role; otherwise, adjust as needed.
       navigate('/dashboard', { state: { role } }); // Pass the role to the dashboard
     } catch (err) {

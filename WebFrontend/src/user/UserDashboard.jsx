@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-const surveys = [
-  { id: 1, title: 'Customer Satisfaction Survey' },
-  { id: 2, title: 'Product Feedback Survey' },
-  // Add more surveys as needed
-];
+import { useAuth } from '../AuthContext'; // Import useAuth hook
 
 const UserDashboard = () => {
+  const { authToken } = useAuth(); // Use the authToken from AuthContext
   const navigate = useNavigate();
+  const [surveys, setSurveys] = useState([]);
   const [showSchedulePopup, setShowSchedulePopup] = useState(false);
   const [scheduledDate, setScheduledDate] = useState('');
   const [currentSurveyId, setCurrentSurveyId] = useState(null);
+
+  useEffect(() => {
+    const fetchSurveys = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/surveys/', {
+          headers: { Authorization: `Bearer ${authToken}` } // Pass the auth token in headers
+        });
+        setSurveys(response.data);
+      } catch (error) {
+        console.error('Error fetching surveys:', error);
+      }
+    };
+
+    fetchSurveys();
+  }, [authToken]);
 
   const openSchedulePopup = (surveyId) => {
     setCurrentSurveyId(surveyId);
@@ -39,11 +52,11 @@ const UserDashboard = () => {
     <div>
       <h1>User Dashboard</h1>
       {surveys.map((survey) => (
-        <div key={survey.id} className="survey-panel">
+        <div key={survey._id} className="survey-panel">
           <h3>{survey.title}</h3>
-          <button onClick={() => openSchedulePopup(survey.id)}>Schedule</button>
-          <button onClick={() => takeSurvey(survey.id)}>Take Survey</button>
-          <button onClick={() => navigate(`/survey-results/${survey.id}`)}>Results</button>
+          <button onClick={() => openSchedulePopup(survey._id)}>Schedule</button>
+          <button onClick={() => takeSurvey(survey._id)}>Take Survey</button>
+          <button onClick={() => navigate(`/survey-results/${survey._id}`)}>Results</button>
         </div>
       ))}
 
